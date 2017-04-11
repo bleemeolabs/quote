@@ -1,0 +1,41 @@
+version: '3'
+
+
+services:
+    proxy:
+        image: traefik
+        command: --web --docker --docker.exposedbydefault=false --logLevel=DEBUG --web.metrics.prometheus
+        ports:
+            - 80:80
+            - 8080:8080
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /dev/null:/traefik.toml
+        restart: unless-stopped
+
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile.nginx
+        labels:
+            - "traefik.backend=nginx"
+            - "traefik.frontend.rule=Host:quote.bleemeo.com"
+            - "traefik.enable=true"
+        restart: unless-stopped
+
+    uwsgi:
+        build:
+            context: .
+            dockerfile: Dockerfile.uwsgi
+        environment:
+            - DJANGO_SETTINGS_MODULE=bleemeo_quote.settings.production
+        restart: unless-stopped
+
+    mysql:
+        image: mysql
+        environment:
+            - MYSQL_USER=bleemeo_quote_user
+            - MYSQL_PASSWORD=password
+            - MYSQL_DATABASE=bleemeo_quote
+            - MYSQL_ROOT_PASSWORD=secret
+        restart: unless-stopped

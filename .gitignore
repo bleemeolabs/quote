@@ -1,0 +1,9 @@
+*.pyc
+*.*.swp
+.*project
+db.sqlite3
+settings_local.py
+celerybeat-schedule
+.pydevproject
+.settings/
+.idea/

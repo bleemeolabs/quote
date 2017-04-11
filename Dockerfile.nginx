@@ -1,0 +1,13 @@
+FROM ubuntu:16.04
+
+RUN apt-get -y update && \
+    apt-get -y dist-upgrade && \
+    apt-get -y --no-install-recommends install nginx
+
+ADD deploy/quote.bleemeo.com /etc/nginx/sites-available/quote.bleemeo.com
+RUN ln -s /etc/nginx/sites-available/quote.bleemeo.com /etc/nginx/sites-enabled/quote.bleemeo.com
+RUN rm /etc/nginx/sites-enabled/default
+
+EXPOSE 80
+
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
