@@ -29,6 +29,7 @@ services:
             dockerfile: Dockerfile.uwsgi
         environment:
             - DJANGO_SETTINGS_MODULE=bleemeo_quote.settings.production
+            - STATSD_HOST=172.17.0.1
         restart: unless-stopped
 
     mysql:

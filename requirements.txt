@@ -1,4 +1,5 @@
 Django
 django-extensions
+django-statsd-mozilla
 uwsgi
 mysqlclient
