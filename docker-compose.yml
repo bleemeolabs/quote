@@ -2,7 +2,7 @@ version: '3'
 
 
 services:
-    proxy:
+    traefik:
         image: traefik
         command: --web --docker --docker.exposedbydefault=false --logLevel=DEBUG --web.metrics.prometheus
         ports:
