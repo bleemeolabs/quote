@@ -21,8 +21,13 @@ def main():
             'http://%s:%s/' % (args.address, args.port),
             headers={'Host': args.hostname},
         )
-        resp = urllib.request.urlopen(request)
-        if args.verbose:
+        try:
+            resp = urllib.request.urlopen(request)
+        except Exception as exc:
+            print('Request failed: %s' % exc)
+            resp = None
+
+        if args.verbose and resp is not None:
             print('Response is:\n%s' % resp.read().decode('utf-8'))
         if args.random:
             time.sleep(random.random() * args.delay)
