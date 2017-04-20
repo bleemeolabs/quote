@@ -8,6 +8,8 @@ services:
         ports:
             - 80:80
             - 8080:8080
+        labels:
+            - "bleemeo.stack=bleemeoquote"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /dev/null:/traefik.toml
@@ -21,12 +23,15 @@ services:
             - "traefik.backend=nginx"
             - "traefik.frontend.rule=Host:quote.bleemeo.com"
             - "traefik.enable=true"
+            - "bleemeo.stack=bleemeoquote"
         restart: unless-stopped
 
     uwsgi:
         build:
             context: .
             dockerfile: Dockerfile.uwsgi
+        labels:
+            - "bleemeo.stack=bleemeoquote"
         environment:
             - DJANGO_SETTINGS_MODULE=bleemeo_quote.settings.production
             - STATSD_HOST=172.17.0.1
@@ -39,4 +44,6 @@ services:
             - MYSQL_PASSWORD=password
             - MYSQL_DATABASE=bleemeo_quote
             - MYSQL_ROOT_PASSWORD=secret
+        labels:
+            - "bleemeo.stack=bleemeoquote"
         restart: unless-stopped
