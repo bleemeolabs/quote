@@ -1,5 +1,5 @@
-Django
+Django<2.2
 django-extensions
 django-statsd-mozilla
 uwsgi
-mysqlclient
+psycopg2-binary

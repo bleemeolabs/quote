@@ -1,0 +1,9 @@
+*/*.pyc
+*/settings_local.py*
+.gitignore
+.git
+build
+wheelhouse
+virtualenv
+db.sqlite3
+.tox
