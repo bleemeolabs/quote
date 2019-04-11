@@ -16,7 +16,7 @@ rsync -av ./wheelhouse/* /srv/www/wheelhouse.bleemeo.work/htdocs/
         stage ('Docker Image Build') {
             sh '''
 docker pull ubuntu:18.04
-docker build -t bleemeo/quote.bleemeo.com-uwsgi -f Dockerfile.uwsgi .
+docker build -t bleemeo/quote.bleemeo.com-uwsgi -f Dockerfile .
 docker build -t bleemeo/quote.bleemeo.com-nginx -f Dockerfile.nginx .
             '''
         }

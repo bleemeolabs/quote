@@ -29,7 +29,7 @@ services:
     uwsgi:
         build:
             context: .
-            dockerfile: Dockerfile.uwsgi
+            dockerfile: Dockerfile
         labels:
             - "bleemeo.stack=bleemeoquote"
         environment:
