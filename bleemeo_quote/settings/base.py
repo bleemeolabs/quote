@@ -122,6 +122,8 @@ QUOTE_CSV_FILE = os.path.join(BASE_DIR, 'randomquotes.csv')
 STATSD_CLIENT = 'django_statsd.clients.normal'
 STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
 
+QUOTE_CACHE_DURATION = int(os.environ.get('QUOTE_CACHE_DURATION', '2'))
+
 STATSD_PATCHES = [
     'django_statsd.patches.db',
 ]

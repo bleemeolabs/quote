@@ -46,3 +46,9 @@ services:
         labels:
             - "bleemeo.stack=bleemeoquote"
         restart: unless-stopped
+
+    redis:
+        image: redis:5.0.4
+        labels:
+            - "bleemeo.stack=bleemeoquote"
+        restart: unless-stopped

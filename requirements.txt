@@ -3,3 +3,4 @@ django-extensions
 django-statsd-mozilla
 uwsgi
 psycopg2-binary
+django-redis
