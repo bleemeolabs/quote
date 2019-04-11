@@ -12,6 +12,6 @@ DATABASES = {
         'NAME': 'bleemeo_quote',
         'USER': 'bleemeo_quote_user',
         'PASSWORD': os.environ.get("DJANGO_DATABASE_PASSWORD", 'password'),
-        'HOST': 'mysql',
+        'HOST': 'postgresql',
     }
 }

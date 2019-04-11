@@ -37,13 +37,12 @@ services:
             - STATSD_HOST=172.17.0.1
         restart: unless-stopped
 
-    mysql:
-        image: mysql
+    postgresql:
+        image: postgres:11
         environment:
-            - MYSQL_USER=bleemeo_quote_user
-            - MYSQL_PASSWORD=password
-            - MYSQL_DATABASE=bleemeo_quote
-            - MYSQL_ROOT_PASSWORD=secret
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=bleemeo_quote_user
+            - POSTGRES_DB=bleemeo_quote
         labels:
             - "bleemeo.stack=bleemeoquote"
         restart: unless-stopped
