@@ -17,7 +17,7 @@ spec:
         bleemeo.stack: quote
     spec:
       containers:
-      - image: bleemeolabs/quote:latest
+      - image: bleemeolabs/quote:latest-arm
         imagePullPolicy: IfNotPresent
         name: quote
         env:
@@ -25,6 +25,10 @@ spec:
           value: "bleemeo_quote.settings.production"
         - name: DJANGO_DATABASE_PASSWORD
           value: "admin123"
+        - name: STATSD_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
 ---
 apiVersion: v1
 kind: Service
