@@ -2,5 +2,5 @@ Django<2.2
 django-extensions
 django-statsd-mozilla
 uwsgi
-psycopg2-binary
+psycopg2
 django-redis
