@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: quote-load-generator
+  name: quote-load-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: quote-load-generator
+  template:
+    metadata:
+      labels:
+        run: quote-load-generator
+    spec:
+      containers:
+      - image: bleemeolabs/quote:latest
+        imagePullPolicy: IfNotPresent
+        name: quote
+        args:
+        - python3
+        - generate_load.py
+        - --address=traefik.kube-system

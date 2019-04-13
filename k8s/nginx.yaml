@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  default.conf: |
+    upstream django {
+      server quote:8181;
+    }
+
+    server {
+        listen      80;
+        listen      443;
+        server_name quote.bleemeo.com;
+        charset     utf-8;
+
+        location / {
+            include uwsgi_params;
+            uwsgi_pass django;
+            uwsgi_param HTTPS off;
+            uwsgi_param UWSGI_SCHEME http;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Host $server_name;
+            proxy_set_header X-Forwarded-Proto http;
+        }
+        location /nginx_status {
+            stub_status on;
+        }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      run: my-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-nginx
+      annotations:
+        bleemeo.stack: quote
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx:1.15.10
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: config-volume
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nginx-conf
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: my-nginx
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-nginx
+spec:
+  rules:
+  - host: quote.bleemeo.com
+    http:
+      paths:
+      - backend:
+          serviceName: my-nginx
+          servicePort: 80
+
