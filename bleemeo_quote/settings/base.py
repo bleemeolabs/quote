@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'bleemeo_quote',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
     'django_statsd.middleware.GraphiteMiddleware',
 ]
