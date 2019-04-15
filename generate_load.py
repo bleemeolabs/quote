@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
+import os
 import time
 import random
 import urllib.request
@@ -9,7 +10,8 @@ import urllib.request
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--hostname', default='quote.bleemeo.com')
-    parser.add_argument('--address', default='localhost')
+    parser.add_argument('--address', default=os.environ.get('SERVER_ADDRESS', 'localhost'))
+    parser.add_argument('--path', default='/')
     parser.add_argument('--port', default=80, type=int)
     parser.add_argument('--delay', default=1.0, type=float)
     parser.add_argument('--random', default=False, action='store_true')
@@ -18,7 +20,7 @@ def main():
 
     while True:
         request = urllib.request.Request(
-            'http://%s:%s/' % (args.address, args.port),
+            'http://%s:%s%s' % (args.address, args.port, args.path),
             headers={'Host': args.hostname},
         )
         try:

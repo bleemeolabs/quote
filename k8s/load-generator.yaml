@@ -22,3 +22,30 @@ spec:
         - python3
         - generate_load.py
         - --address=traefik.kube-system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: quote-load-generator-404
+  name: quote-load-generator-404
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: quote-load-generator-404
+  template:
+    metadata:
+      labels:
+        run: quote-load-generator-404
+    spec:
+      containers:
+      - image: bleemeolabs/quote:latest-arm
+        imagePullPolicy: IfNotPresent
+        name: quote
+        args:
+        - python3
+        - generate_load.py
+        - --address=traefik.kube-system
+        - --path=/404
+        - --delay=5
