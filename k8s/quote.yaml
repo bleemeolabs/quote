@@ -17,7 +17,7 @@ spec:
         bleemeo.stack: quote
     spec:
       containers:
-      - image: bleemeolabs/quote:latest-arm
+      - image: bleemeolabs/quote:latest
         imagePullPolicy: IfNotPresent
         name: quote
         env:
