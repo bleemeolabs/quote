@@ -1,7 +1,6 @@
 Django<2.3
 django-extensions
 django-prometheus
-django-statsd-mozilla
 uwsgi
 psycopg2
 django-redis
