@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_prometheus',
     'bleemeo_quote',
+    'health_check',                             # required
+    'health_check.db',                          # stock Django health checkers
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.psutil',              # disk and memory utilization; requires psutil
+    'health_check.contrib.redis',               # required Redis broker
 ]
 
 MIDDLEWARE = [

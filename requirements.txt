@@ -1,6 +1,8 @@
 Django<2.3
 django-extensions
+django-health-check
 django-prometheus
 uwsgi
+psutil
 psycopg2
 django-redis

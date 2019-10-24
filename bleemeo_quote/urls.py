@@ -19,4 +19,5 @@ import bleemeo_quote.views
 urlpatterns = [
     url(r'^$', bleemeo_quote.views.index),
     url('', include('django_prometheus.urls')),
+    url(r'^ht/', include('health_check.urls')),
 ]
