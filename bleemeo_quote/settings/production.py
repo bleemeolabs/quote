@@ -16,11 +16,22 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "quote"
+    }
+}
+
 # Fix redis get if cached = 0 or False #115
 # CACHES = {
 #     "default": {
 #         "BACKEND": "django_prometheus.cache.backends.redis.RedisCache",
-#         "LOCATION": "redis://localhost:6379",
+#         "LOCATION": "redis://redis:6379",
 #         "OPTIONS": {
 #             "CLIENT_CLASS": "django_redis.client.DefaultClient"
 #         },
