@@ -38,12 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_prometheus',
     'bleemeo_quote',
 ]
 
 MIDDLEWARE = [
-    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
-    'django_statsd.middleware.GraphiteMiddleware',
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'bleemeo_quote.urls'
@@ -72,7 +76,7 @@ WSGI_APPLICATION = 'bleemeo_quote.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django_prometheus.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
@@ -119,11 +123,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'bleemeo_quote', 'static')
 
 QUOTE_CSV_FILE = os.path.join(BASE_DIR, 'randomquotes.csv')
 
-STATSD_CLIENT = 'django_statsd.clients.normal'
-STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
-
 QUOTE_CACHE_DURATION = int(os.environ.get('QUOTE_CACHE_DURATION', '2'))
-
-STATSD_PATCHES = [
-    'django_statsd.patches.db',
-]

@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 import bleemeo_quote.views
 
 urlpatterns = [
     url(r'^$', bleemeo_quote.views.index),
+    url('', include('django_prometheus.urls')),
 ]
