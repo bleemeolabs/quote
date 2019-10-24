@@ -11,9 +11,7 @@ RUN apt-get -y update && \
     mkdir -p /srv/app/bleemeo_quote/static && \
     chown -R daemon:daemon /srv/app/bleemeo_quote/static && \
     pip3 install -U pip && \
-    pip install --no-cache-dir --upgrade -r /srv/app/requirements.txt && \
-    cd /srv/app && DJANGO_SETTINGS_MODULE="bleemeo_quote.settings.production" python3 manage.py collectstatic --noinput
-
+    pip install --no-cache-dir --upgrade -r /srv/app/requirements.txt
 
 USER daemon
 WORKDIR /srv/app
