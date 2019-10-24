@@ -3,7 +3,7 @@ version: '3'
 
 services:
     traefik:
-        image: traefik
+        image: traefik:1.7
         command: --web --docker --docker.exposedbydefault=false --logLevel=DEBUG --web.metrics.prometheus
         ports:
             - 80:80
