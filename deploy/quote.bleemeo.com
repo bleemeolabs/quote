@@ -22,10 +22,4 @@ server {
         proxy_set_header X-Forwarded-Host $server_name;
         proxy_set_header X-Forwarded-Proto http;
     }
-    location /nginx_status {
-        stub_status on;
-    }
-
-    access_log /var/log/nginx/quote.bleemeo.com_access.log;
-    error_log /var/log/nginx/quote.bleemeo.com_error.log;
 }

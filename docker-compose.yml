@@ -15,23 +15,15 @@ services:
             - /dev/null:/traefik.toml
         restart: unless-stopped
 
-    nginx:
-        build:
-            context: .
-            dockerfile: Dockerfile.nginx
-        labels:
-            - "traefik.backend=nginx"
-            - "traefik.frontend.rule=Host:quote.bleemeo.com"
-            - "traefik.enable=true"
-            - "bleemeo.stack=bleemeoquote"
-        restart: unless-stopped
-
     uwsgi:
         build:
             context: .
             dockerfile: Dockerfile
         labels:
             - "bleemeo.stack=bleemeoquote"
+            - "traefik.backend=uwsgi"
+            - "traefik.frontend.rule=Host:quote.bleemeo.com"
+            - "traefik.enable=true"
         environment:
             - DJANGO_SETTINGS_MODULE=bleemeo_quote.settings.production
         restart: unless-stopped
