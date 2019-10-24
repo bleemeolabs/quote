@@ -24,6 +24,7 @@ services:
             - "traefik.backend=uwsgi"
             - "traefik.frontend.rule=Host:quote.bleemeo.com"
             - "traefik.enable=true"
+            - traefik.port=8181
         environment:
             - DJANGO_SETTINGS_MODULE=bleemeo_quote.settings.production
         restart: unless-stopped
