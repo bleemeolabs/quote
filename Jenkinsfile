@@ -10,19 +10,21 @@ node {
         	sh '''
 mkdir -p wheelhouse
 docker run --rm -v $(pwd):/srv/data bleemeo/wheelsbuilder-18.04 pip3 wheel --wheel-dir=/srv/data/wheelhouse -r /srv/data/requirements.txt
-rsync -av ./wheelhouse/* /srv/www/wheelhouse.bleemeo.work/htdocs/
+rsync -azv wheelhouse/ wheelhouse.bleemeo.work:/srv/www/wheelhouse.bleemeo.work/htdocs/
             '''
         }
         stage ('Docker Image Build') {
             sh '''
 docker pull ubuntu:18.04
-docker build -t bleemeo/quote.bleemeo.com-uwsgi -f Dockerfile .
+docker build -t bleemeo/bleemeo-quote-uwsgi -f Dockerfile .
             '''
         }
       	stage ('Docker Image Publish') {
             sh '''
-docker tag bleemeo/quote.bleemeo.com-uwsgi:latest registry.bleemeo.work/bleemeo/quote.bleemeo.com-uwsgi:latest
-docker push registry.bleemeo.work/bleemeo/quote.bleemeo.com-uwsgi:latest
+docker tag bleemeo/bleemeo-quote-uwsgi:latest registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
+docker push registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
+docker rmi registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
+docker rmi bleemeo/bleemeo-quote-uwsgi:latest
             '''
       	}
     } catch (err) {
