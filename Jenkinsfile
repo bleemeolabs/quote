@@ -21,6 +21,11 @@ docker build -t bleemeo/bleemeo-quote-uwsgi -f Dockerfile .
         }
       	stage ('Docker Image Publish') {
             sh '''
+
+docker tag bleemeo/bleemeo-quote-uwsgi:latest bleemeolabs/quote
+docker push bleemeolabs/quote
+docker rmi bleemeolabs/quote
+
 docker tag bleemeo/bleemeo-quote-uwsgi:latest registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
 docker push registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
 docker rmi registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
