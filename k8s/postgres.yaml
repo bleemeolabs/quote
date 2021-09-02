@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:10.4
+          image: postgres:13.4
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
@@ -56,5 +56,3 @@ spec:
           hostPath:
             path: /mnt/data
             type: DirectoryOrCreate
-      nodeSelector:
-        disktype: ssd

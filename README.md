@@ -20,7 +20,7 @@ To run in development on Debian/Ubuntu system:
 
 ```
 mkvirtualenv -p /usr/bin/python3 bleemeo-quote
-pip install -r requrements.txt
+pip install -r requirements.txt
 python manage.py migrate
 python load_initial_data.py
 python manage.py runserver

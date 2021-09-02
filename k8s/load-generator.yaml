@@ -4,6 +4,9 @@ metadata:
   labels:
     run: quote-load-generator
   name: quote-load-generator
+  annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8181"
 spec:
   replicas: 1
   selector:
@@ -15,13 +18,15 @@ spec:
         run: quote-load-generator
     spec:
       containers:
-      - image: bleemeolabs/quote:latest-arm
+      - image: bleemeolabs/quote:latest
         imagePullPolicy: IfNotPresent
         name: quote
         args:
         - python3
         - generate_load.py
-        - --address=traefik.kube-system
+        - --address=192.168.99.103
+        - --port=30003
+        - --delay=0.01
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,12 +45,13 @@ spec:
         run: quote-load-generator-404
     spec:
       containers:
-      - image: bleemeolabs/quote:latest-arm
+      - image: bleemeolabs/quote:latest
         imagePullPolicy: IfNotPresent
         name: quote
         args:
         - python3
         - generate_load.py
-        - --address=traefik.kube-system
+        - --address=192.168.99.103
+        - --port=30003
         - --path=/404
         - --delay=5

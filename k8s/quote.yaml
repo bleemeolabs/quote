@@ -2,19 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    run: quote
+    name: quote
   name: quote
+  annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8181"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: quote
+      name: quote
   template:
     metadata:
       labels:
-        run: quote
+        name: quote
       annotations:
         bleemeo.stack: quote
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8181"
     spec:
       containers:
       - image: bleemeolabs/quote:latest
@@ -31,12 +36,14 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: quote
+    name: quote
   name: quote
 spec:
-  selector:
-    run: quote
+  type: NodePort
   ports:
   - port: 8181
     protocol: TCP
     targetPort: 8181
+    nodePort: 30003
+  selector:
+    name: quote
