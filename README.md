@@ -54,3 +54,7 @@ optional arguments:
   --verbose
 ```
 
+or with kubernetes:
+```
+kubectl -n quote scale deployment --replicas=1 quote-load-generator
+```
