@@ -1,4 +1,4 @@
-Django<3.3
+Django<4.2
 django-extensions
 django-health-check
 django-prometheus
