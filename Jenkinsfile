@@ -9,13 +9,13 @@ node {
         stage ('Build Wheels') {
         	sh '''
 mkdir -p wheelhouse
-docker run --rm -v $(pwd):/srv/data registry.bleemeo.work/bleemeo/wheelsbuilder-20.04 pip3 wheel --wheel-dir=/srv/data/wheelhouse -r /srv/data/requirements.txt
+docker run --rm -v $(pwd):/srv/data registry.bleemeo.work/bleemeo/wheelsbuilder-22.04 pip3 wheel --wheel-dir=/srv/data/wheelhouse -r /srv/data/requirements.txt
 rsync -azv wheelhouse/ wheelhouse.bleemeo.work:/srv/www/wheelhouse.bleemeo.work/htdocs/
             '''
         }
         stage ('Docker Image Build') {
             sh '''
-docker pull ubuntu:20.04
+docker pull ubuntu:22.04
 docker build -t bleemeo/bleemeo-quote-uwsgi -f Dockerfile .
             '''
         }
