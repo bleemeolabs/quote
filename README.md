@@ -26,6 +26,16 @@ python load_initial_data.py
 python manage.py runserver
 ```
 
+Upgrade packages on MacOS:
+
+```
+deactivate
+rmvirtualenv bleemeo-quote
+mkvirtualenv -p /opt/homebrew/bin/python3.10 bleemeo-quote
+pip install -r requirements-in.txt
+pip freeze > requirements.txt
+```
+
 ## Generates Load
 
 There is a basic load generator script that allows you to generate
