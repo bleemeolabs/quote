@@ -16,20 +16,15 @@ rsync -azv wheelhouse/ wheelhouse.bleemeo.work:/srv/www/wheelhouse.bleemeo.work/
         stage ('Docker Image Build') {
             sh '''
 docker pull ubuntu:22.04
-docker build -t bleemeo/bleemeo-quote-uwsgi -f Dockerfile .
+docker build -t bleemeolabs/quote -f Dockerfile .
             '''
         }
       	stage ('Docker Image Publish') {
             sh '''
-
-docker tag bleemeo/bleemeo-quote-uwsgi:latest bleemeolabs/quote
-docker push bleemeolabs/quote
+docker tag  bleemeolabs/quote ghcr.io/bleemeolabs/quote
+docker push ghcr.io/bleemeolabs/quote
+docker rmi ghcr.io/bleemeolabs/quote
 docker rmi bleemeolabs/quote
-
-docker tag bleemeo/bleemeo-quote-uwsgi:latest registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
-docker push registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
-docker rmi registry.bleemeo.work/bleemeo/bleemeo-quote-uwsgi:latest
-docker rmi bleemeo/bleemeo-quote-uwsgi:latest
             '''
       	}
     } catch (err) {
