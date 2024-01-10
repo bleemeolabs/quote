@@ -18,7 +18,7 @@ spec:
         run: quote-load-generator
     spec:
       containers:
-      - image: bleemeolabs/quote:latest
+      - image: ghcr.io/bleemeolabs/quote:latest
         imagePullPolicy: IfNotPresent
         name: quote
         args:
@@ -45,7 +45,7 @@ spec:
         run: quote-load-generator-404
     spec:
       containers:
-      - image: bleemeolabs/quote:latest
+      - image: ghcr.io/bleemeolabs/quote:latest
         imagePullPolicy: IfNotPresent
         name: quote
         args:
