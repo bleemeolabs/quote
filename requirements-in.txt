@@ -6,3 +6,4 @@ uwsgi
 psutil
 psycopg2
 django-redis
+tzdata
