@@ -3,13 +3,11 @@ import django
 import os
 from django.conf import settings
 
-from bleemeo_quote.models import Author, Quote
-
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bleemeo_quote.settings.development")
 
 django.setup()
 
+from bleemeo_quote.models import Author, Quote  # noqa: E402
 
 with open(settings.QUOTE_CSV_FILE, encoding="utf-8") as fd:
     reader = csv.reader(fd, delimiter=";")
