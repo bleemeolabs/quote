@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "bleemeo-quote"
+version = "1.0.0"
+description = "This is a sample demo application that generates a quote of the day."
+authors = ["Clement Cavanier <clement.cavanier@bleemeo.com>", "Lionel Porcheron <lionel.porcheron@bleemeo.com>", "Pierre Fersing <pierre.fersing@bleemeo.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.12"
+Django = "*"
+django-extensions = "*"
+django-health-check = "*"
+django-prometheus = "*"
+django-redis = "*"
+psutil = "*"
+psycopg = "*"
+tzdata = "*"
+uwsgi = "*"
+
+[tool.poetry.group.dev.dependencies]
+tox = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+exclude = [
+    ".tox/*",
+    ".git/*",
+    "bleemeo_quote/settings/*",
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.12
+target-version = "py312"
+
+[tool.typos.files]
+extend-exclude = ["*.svg"]
