@@ -27,7 +27,7 @@ services:
         restart: unless-stopped
 
     postgresql:
-        image: postgres:11
+        image: postgres:16
         environment:
             - POSTGRES_PASSWORD=password
             - POSTGRES_USER=bleemeo_quote_user
@@ -37,7 +37,7 @@ services:
         restart: unless-stopped
 
     redis:
-        image: redis:5.0.4
+        image: redis:7.2.4
         labels:
             - "bleemeo.stack=bleemeoquote"
         restart: unless-stopped
