@@ -13,11 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
 from django.urls import include, path
 import bleemeo_quote.views
 
 urlpatterns = [
     path("", bleemeo_quote.views.index),
-    path("", include('django_prometheus.urls')),
-    path("ht/", include('health_check.urls')),
+    path("", include("django_prometheus.urls")),
+    path("ht/", include("health_check.urls")),
 ]

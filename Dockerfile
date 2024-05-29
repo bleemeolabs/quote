@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 LABEL MAINTAINER="Bleemeo Docker Maintainers <packaging-team@bleemeo.com>"
 
@@ -10,8 +10,8 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p /srv/app/bleemeo_quote/static && \
     chown -R daemon:daemon /srv/app/bleemeo_quote/static && \
-    pip3 install -U pip && \
-    pip install --no-cache-dir --upgrade -r /srv/app/requirements.txt
+    pip3 install -U pip --break-system-packages && \
+    pip install --no-cache-dir --upgrade -r /srv/app/requirements.txt --break-system-packages
 
 USER daemon
 WORKDIR /srv/app

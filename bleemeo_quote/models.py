@@ -6,5 +6,5 @@ class Author(models.Model):
 
 
 class Quote(models.Model):
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    author = models.ForeignKey("Author", on_delete=models.CASCADE)
     quote = models.TextField()

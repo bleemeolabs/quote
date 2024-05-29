@@ -10,30 +10,43 @@ simply observe an application.
 
 ## Run it
 
-With docker, you can simply run:
-
+To run in development on Debian/Ubuntu system, we recommend pipx usage :
 ```
-docker-compose up -d
+sudo apt install pipx
+pipx ensurepath
+echo "Restart your shell if you just installed pipx
+pipx install poetry pre-commit
+pre-commit install
 ```
 
-To run in development on Debian/Ubuntu system:
-
+On MacOS:
 ```
-mkvirtualenv -p /usr/bin/python3 bleemeo-quote
-pip install -r requirements.txt
+brew install python@3.12 pipx
+pipx ensurepath
+echo "Restart your shell if you just installed pipx"
+pipx install poetry pre-commit
+pre-commit install
+poetry env use python3.12
+```
+
+To run:
+```
+poetry install --no-root --sync
+poetry shell
+
 python manage.py migrate
 python load_initial_data.py
 python manage.py runserver
 ```
 
-Upgrade packages on MacOS:
+## Upgrade packages:
 
 ```
-deactivate
-rmvirtualenv bleemeo-quote
-mkvirtualenv -p /opt/homebrew/bin/python3.10 bleemeo-quote
-pip install -r requirements-in.txt
-pip freeze > requirements.txt
+poetry update
+poetry self add poetry-plugin-export
+poetry export --without-hashes --only main -f requirements.txt --output requirements.txt
+
+pre-commit autoupdate
 ```
 
 ## Generates Load
