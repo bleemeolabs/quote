@@ -10,13 +10,6 @@ simply observe an application.
 
 ## Run it
 
-With docker, you can simply run:
-
-```
-docker-compose up -d
-```
-
-
 To run in development on Debian/Ubuntu system, we recommend pipx usage :
 ```
 sudo apt install pipx
